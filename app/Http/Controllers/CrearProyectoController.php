@@ -22,7 +22,14 @@ class CrearProyectoController extends Controller
             'monto' => 'required|numeric',
         ]);
 
-        Proyecto::crearProyecto($datos);
+        // Guardamos en SQLite usando Eloquent y mapeando fecha_inicio -> fecha_de_inicio
+        Proyecto::create([
+            'nombre' => $datos['nombre'],
+            'fecha_de_inicio' => $datos['fecha_inicio'],
+            'estado' => $datos['estado'],
+            'responsable' => $datos['responsable'],
+            'monto' => $datos['monto'],
+        ]);
 
         return redirect()->route('proyectos.index')->with('success', 'Proyecto creado exitosamente.');
     }

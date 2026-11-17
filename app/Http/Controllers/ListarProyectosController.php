@@ -11,12 +11,10 @@ class ListarProyectosController extends Controller
     public function __invoke(Request $request)
     {
 
-        //se solicitan los datos al modelo
-        $proyectos = Proyecto::getProyectos();
-
-        return view('proyectos.index', ['proyectos' => $proyectos]);
 
 
+$proyectos = Proyecto::all();
+return view('proyectos.index', compact('proyectos')); // Ajusta el nombre de tu vista Blade
 
 
     }

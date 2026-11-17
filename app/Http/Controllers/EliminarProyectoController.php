@@ -1,3 +1,4 @@
+PHP
 <?php
 
 namespace App\Http\Controllers;
@@ -9,27 +10,27 @@ class EliminarProyectoController extends Controller
 {
     public function show($id)
     {
-        $proyecto = Proyecto::buscarporID($id);
-
-        if (!$proyecto) {
-            abort(404, 'Proyecto no encontrado');
-        }
+        
+        $proyecto = Proyecto::findOrFail($id);
 
         return view('proyectos.borrar', compact('proyecto'));
     }
 
     public function destroy($id)
     {
-        Proyecto::eliminarProyecto($id);
+        $proyecto = Proyecto::findOrFail($id);
+        $proyecto->delete();
+
         return redirect()->route('proyectos.index')->with('success', 'Proyecto eliminado exitosamente.');
     }
 
     public function eliminarPorId(Request $request)
     {
         $id = $request->input('id');
-        $eliminado = Proyecto::eliminarProyecto($id);
+        $proyecto = Proyecto::find($id);
 
-        if ($eliminado) {
+        if ($proyecto) {
+            $proyecto->delete();
             return redirect()->route('proyectos.index')->with('success', 'Proyecto eliminado exitosamente.');
         }
 

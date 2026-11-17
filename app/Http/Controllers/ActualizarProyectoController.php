@@ -9,11 +9,7 @@ class ActualizarProyectoController extends Controller
 {
     public function edit($id)
     {
-        $proyecto = Proyecto::buscarporID($id);
-
-        if (!$proyecto) {
-            abort(404, 'Proyecto no encontrado');
-        }
+        $proyecto = Proyecto::findOrFail($id);
 
         return view('proyectos.edicion', compact('proyecto'));
     }
@@ -28,8 +24,18 @@ class ActualizarProyectoController extends Controller
             'monto' => 'required|numeric',
         ]);
 
-        Proyecto::actualizarProyecto($id, $datos);
+        
+$proyecto = Proyecto::findOrFail($id);
+$proyecto->update([
+    'nombre' => $request->input('nombre'),
+    'fecha_de_inicio' => $request->input('fecha_de_inicio') ?? $request->input('fecha_inicio'),
+    'estado' => $request->input('estado'),
+    'responsable' => $request->input('responsable'),
+    'monto' => $request->input('monto'),
+]);
 
-        return redirect()->route('proyectos.index')->with('success', 'Proyecto actualizado exitosamente.');
+
+return redirect()->route('proyectos.index')->with('success', 'Proyecto actualizado exitosamente.');
+
     }
 }

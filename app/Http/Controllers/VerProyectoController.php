@@ -12,7 +12,7 @@ class VerProyectoController extends Controller
      */
     public function __invoke($id)
     {
-        $proyecto = Proyecto::buscarporID($id);
+        $proyecto = Proyecto::findOrFail($id);
 
         if (!$proyecto) {
             // Mejoramos el error para que regrese a la tabla con el mensaje de Tailwind
@@ -28,7 +28,7 @@ class VerProyectoController extends Controller
     public function buscarPorId(Request $request)
     {
         $id = $request->input('id');
-        $proyecto = Proyecto::buscarporID($id);
+        $proyecto = Proyecto::findOrFail($id);
 
         if ($proyecto) {
             return view('proyectos.detalles', compact('proyecto'));
