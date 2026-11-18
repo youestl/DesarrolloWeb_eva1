@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 class Proyecto extends Model
 {
     protected $fillable = [
-        'nombre', 
+        'nombre',
         'fecha_de_inicio',
         'estado',
         'responsable',
-        'monto'
+        'monto',
+        'created_by'
     ];
 
     public function getFechaInicioAttribute()

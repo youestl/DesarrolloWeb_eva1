@@ -1,4 +1,3 @@
-PHP
 <?php
 
 namespace App\Http\Controllers;
@@ -10,7 +9,7 @@ class EliminarProyectoController extends Controller
 {
     public function show($id)
     {
-        
+
         $proyecto = Proyecto::findOrFail($id);
 
         return view('proyectos.borrar', compact('proyecto'));
