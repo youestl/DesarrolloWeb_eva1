@@ -9,7 +9,7 @@ use App\Http\Controllers\EliminarProyectoController;
 
 // Redirección de la raíz al listado general
 Route::get('/', function () {
-    return redirect('/proyectos');
+    return redirect()->route('login');
 });
 
 // 1. Listar todos los proyectos
@@ -34,3 +34,6 @@ Route::delete('/proyectos/{id}', [EliminarProyectoController::class, 'destroy'])
 // 6. Para los Eliminar por id
 Route::post('/proyectos/buscar', [VerProyectoController::class, 'buscarPorId'])->name('proyectos.buscarPorId');
 Route::post('/proyectos/eliminar-id', [EliminarProyectoController::class, 'eliminarPorId'])->name('proyectos.eliminarPorId');
+
+Route::view('/registro', 'proyectos.registro')->name('registro');
+Route::view('/login', 'proyectos.login')->name('login');
